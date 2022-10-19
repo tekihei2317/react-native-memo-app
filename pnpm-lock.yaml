@@ -17,6 +17,7 @@ importers:
       '@types/react': ~18.0.14
       '@types/react-dom': 18.0.0
       '@types/react-native': ~0.69.1
+      date-fns: ^2.29.3
       expo: ~46.0.16
       expo-status-bar: ~1.4.0
       react: 18.0.0
@@ -32,6 +33,7 @@ importers:
     dependencies:
       '@react-navigation/native': 6.0.13_gtltrjvtlgj7ga36qzsxajwqwe
       '@react-navigation/stack': 6.3.2_bzmyymgi6ffis2tjftmiym3n2m
+      date-fns: 2.29.3
       expo: 46.0.16_@babel+core@7.19.3
       expo-status-bar: 1.4.0
       react: 18.0.0
@@ -3049,6 +3051,11 @@ packages:
 
   /dag-map/1.0.2:
     resolution: {integrity: sha512-+LSAiGFwQ9dRnRdOeaj7g47ZFJcOUPukAP8J3A3fuZ1g9Y44BG+P1sgApjLXTQPOzC4+7S9Wr8kXsfpINM4jpw==}
+    dev: false
+
+  /date-fns/2.29.3:
+    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
+    engines: {node: '>=0.11'}
     dev: false
 
   /dayjs/1.11.5:
