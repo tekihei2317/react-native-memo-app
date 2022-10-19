@@ -1,6 +1,8 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native'
-import { List } from 'react-native-paper'
+import { StyleSheet, View, FlatList } from 'react-native'
+import { List, FAB } from 'react-native-paper'
 import format from 'date-fns/format'
+import { useNavigation } from '@react-navigation/native'
+import { ScreenNavigationProp } from '../utils/navigation'
 
 const styles = StyleSheet.create({
   container: {
@@ -51,6 +53,11 @@ const MemoItem = ({ memo }: { memo: Memo }) => {
 }
 
 export const MainScreen = () => {
+  const navigation = useNavigation<ScreenNavigationProp<'Main'>>()
+
+  const onPressAdd = () => {
+    navigation.navigate('Compose')
+  }
   return (
     <View style={styles.container}>
       <FlatList
@@ -58,6 +65,7 @@ export const MainScreen = () => {
         keyExtractor={(item) => `${item.createdAt.getTime()}`}
         renderItem={({ item }) => <MemoItem memo={item} />}
       />
+      <FAB style={{ position: 'absolute', right: 16, bottom: 16 }} icon="plus" onPress={onPressAdd} />
     </View>
   )
 }
