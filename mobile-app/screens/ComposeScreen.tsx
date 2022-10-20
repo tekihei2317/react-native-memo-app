@@ -3,12 +3,14 @@ import { useState } from 'react'
 import { StyleSheet, KeyboardAvoidingView } from 'react-native'
 import { TextInput, Button } from 'react-native-paper'
 import { ScreenNavigationProp } from '../utils/navigation'
+import { trpc } from '../utils/trpc'
 
 export const ComposeScreen = () => {
   const navigation = useNavigation<ScreenNavigationProp<'Compose'>>()
   const [text, setText] = useState('')
 
-  const onPressSave = () => {
+  const onPressSave = async () => {
+    await trpc.memo.createMemo.mutate({ text })
     navigation.navigate('Main')
   }
 

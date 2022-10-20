@@ -40,8 +40,10 @@ export const MainScreen = () => {
       const memos = await trpc.memo.getMemos.query()
       setMemos(memos)
     }
-    fetchData()
-  }, [])
+    const unsubscribe = navigation.addListener('focus', fetchData)
+
+    return unsubscribe
+  }, [navigation])
 
   const onPressAdd = () => {
     navigation.navigate('Compose')
