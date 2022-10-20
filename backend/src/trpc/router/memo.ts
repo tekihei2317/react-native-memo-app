@@ -6,6 +6,8 @@ const createMemoSchema = z.object({
 })
 
 const getMemosProcedure = publicProcedure.query(async ({ ctx }) => {
+  const memos = await ctx.prisma.memo.findMany()
+  console.log(memos[0])
   return await ctx.prisma.memo.findMany()
 })
 

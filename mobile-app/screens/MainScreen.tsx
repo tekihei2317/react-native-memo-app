@@ -3,6 +3,8 @@ import { List, FAB } from 'react-native-paper'
 import format from 'date-fns/format'
 import { useNavigation } from '@react-navigation/native'
 import { ScreenNavigationProp } from '../utils/navigation'
+import { trpc } from '../utils/trpc'
+import { useEffect, useState } from 'react'
 
 const styles = StyleSheet.create({
   container: {
@@ -18,29 +20,6 @@ type Memo = {
   createdAt: Date
 }
 
-const memos: Memo[] = [
-  {
-    text: 'メモ',
-    createdAt: new Date('2022-01-01'),
-  },
-  {
-    text: 'メモメモ',
-    createdAt: new Date('2022-01-02'),
-  },
-  {
-    text: 'メモメモメモメモメモメモメモメモメモメモメモメモメモメモ',
-    createdAt: new Date('2022-01-03'),
-  },
-  {
-    text: 'メモメモメモ',
-    createdAt: new Date('2022-01-04'),
-  },
-  {
-    text: 'メモメモメモメモメモ',
-    createdAt: new Date('2022-01-05'),
-  },
-]
-
 const MemoItem = ({ memo }: { memo: Memo }) => {
   return (
     <List.Item
@@ -53,7 +32,16 @@ const MemoItem = ({ memo }: { memo: Memo }) => {
 }
 
 export const MainScreen = () => {
+  const [memos, setMemos] = useState<Memo[]>([])
   const navigation = useNavigation<ScreenNavigationProp<'Main'>>()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const memos = await trpc.memo.getMemos.query()
+      setMemos(memos)
+    }
+    fetchData()
+  }, [])
 
   const onPressAdd = () => {
     navigation.navigate('Compose')
@@ -62,7 +50,7 @@ export const MainScreen = () => {
     <View style={styles.container}>
       <FlatList
         data={memos}
-        keyExtractor={(item) => `${item.createdAt.getTime()}`}
+        keyExtractor={(_, index) => `${index}`}
         renderItem={({ item }) => <MemoItem memo={item} />}
       />
       <FAB style={{ position: 'absolute', right: 16, bottom: 16 }} icon="plus" onPress={onPressAdd} />

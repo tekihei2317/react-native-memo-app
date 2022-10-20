@@ -5,7 +5,6 @@ const path = require('path')
 // Find the project and workspace directories
 const projectRoot = __dirname
 const workspaceRoot = path.resolve(projectRoot, '../')
-console.log({ workspaceRoot })
 
 const config = getDefaultConfig(projectRoot)
 
@@ -18,5 +17,9 @@ config.resolver.nodeModulesPaths = [
 ]
 // 3. Force Metro to resolve (sub)dependencies only from the `nodeModulesPaths`
 config.resolver.disableHierarchicalLookup = true
+
+// superjsonが依存するcopy-anythingが解決できなかったため、cjsを追加
+// https://github.com/blitz-js/superjson/issues/190
+config.resolver.sourceExts.push('cjs')
 
 module.exports = config
