@@ -19,7 +19,12 @@ const createMemoProcedure = publicProcedure.input(createMemoSchema).mutation(asy
   return memo
 })
 
+const healthProcedure = publicProcedure.query(() => {
+  return { status: 'Running' }
+})
+
 export const memoRouter = router({
   getMemos: getMemosProcedure,
   createMemo: createMemoProcedure,
+  health: healthProcedure,
 })
