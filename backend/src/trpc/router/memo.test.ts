@@ -1,21 +1,32 @@
-import { prisma } from '../../utils/prisma'
 import { appRouter, AppRouter } from './_app'
+import { inferProcedureInput } from '@trpc/server'
 
+const prisma = jestPrisma.client
 const caller = appRouter.createCaller({
-  prisma: prisma,
+  prisma,
 })
 
 describe('memoRouter', () => {
-  test('ステータスを確認できること', async () => {
-    const result = await caller.memo.health()
+  test('メモの一覧を取得できること', async () => {
+    const memo = await prisma.memo.create({
+      data: {
+        text: 'Hello, world!',
+      },
+    })
+    const result = await caller.memo.getMemos()
 
-    expect(result).toStrictEqual({ status: 'Running' })
+    expect(result).toEqual([memo]) // toStrictEqualだとパスしなかった
   })
 
-  test('メモの一覧を取得できること', async () => {
-    // const result = await caller.memo.getMemos()
-    const result = []
+  test('メモを登録できること', async () => {
+    const memo: inferProcedureInput<AppRouter['memo']['createMemo']> = {
+      text: 'メモ',
+    }
+    await caller.memo.createMemo(memo)
 
-    expect(result.length).toBe(1)
+    const memos = await prisma.memo.findMany()
+    expect(memos.length).toBe(1)
+    // assertDatabaseHasとかを作りたい
+    expect(memos).toContainEqual(expect.objectContaining(memo))
   })
 })

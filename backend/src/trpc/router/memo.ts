@@ -6,8 +6,6 @@ const createMemoSchema = z.object({
 })
 
 const getMemosProcedure = publicProcedure.query(async ({ ctx }) => {
-  const memos = await ctx.prisma.memo.findMany()
-  console.log(memos[0])
   return await ctx.prisma.memo.findMany()
 })
 
@@ -19,12 +17,7 @@ const createMemoProcedure = publicProcedure.input(createMemoSchema).mutation(asy
   return memo
 })
 
-const healthProcedure = publicProcedure.query(() => {
-  return { status: 'Running' }
-})
-
 export const memoRouter = router({
   getMemos: getMemosProcedure,
   createMemo: createMemoProcedure,
-  health: healthProcedure,
 })
