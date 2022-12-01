@@ -4,9 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "tekihei2317",
-  "license": "ISC"
+  "devDependencies": {
+    "@types/jest": "^29.2.3",
+    "jest": "^29.3.1",
+    "ts-jest": "^29.0.3"
+  }
 }

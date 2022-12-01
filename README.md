@@ -10,11 +10,19 @@ docker compose up -d
 
 # APIの起動
 cd backend
+cp .env.example .env
+pnpm exec prisma migrate deploy
 pnpm run dev
 
 # モバイルの起動（別のシェルを使う）
 cd mobile-app
 pnpm run start
+```
+
+## テスト
+
+```bash
+pnpm test
 ```
 
 ## 参考
