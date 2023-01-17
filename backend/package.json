@@ -9,12 +9,12 @@
     "@types/express": "^4.17.14",
     "@types/node": "^18.11.2",
     "jest-environment-jsdom": "^29.3.1",
-    "prisma": "^4.5.0",
+    "prisma": "^4.7.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "~4.8.4"
   },
   "dependencies": {
-    "@prisma/client": "^4.5.0",
+    "@prisma/client": "^4.7.1",
     "@trpc/server": "10.0.0-proxy-beta.23",
     "express": "^4.18.2",
     "superjson": "^1.10.1",

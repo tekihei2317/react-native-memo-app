@@ -17,7 +17,7 @@ const getPaginatedMemos = publicProcedure.query(async ({ ctx }) => {
     orderBy: { createdAt: 'desc' },
   })
 
-  return { items: paginated, count: paginated.count, pageCount: paginated.pageCount }
+  return { items: paginated.items, count: paginated.count, pageCount: paginated.pageCount }
 })
 
 const createMemoProcedure = publicProcedure.input(createMemoSchema).mutation(async ({ ctx, input }) => {
